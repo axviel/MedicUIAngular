@@ -1,10 +1,10 @@
-<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+<form [formGroup]="formModel" autocomplete="off" (submit)="onSubmit()">
 
   <div class="form-group required">
     <label>Username</label>
     <input class="form-control" formControlName="UserName">
     <label class="text-danger"
-      *ngIf="service.formModel.get('UserName')!.touched && service.formModel.get('UserName')!.errors?.required">This
+      *ngIf="formModel.get('UserName')!.touched && formModel.get('UserName')!.errors?.required">This
       field is mandatory.</label>
   </div>
 
@@ -12,7 +12,7 @@
     <label>Email</label>
     <input class="form-control" formControlName="Email">
     <label class="text-danger"
-      *ngIf="service.formModel.get('Email')!.touched && service.formModel.get('Email')!.errors?.email">Invalid email
+      *ngIf="formModel.get('Email')!.touched && formModel.get('Email')!.errors?.email">Invalid email
       address.</label>
   </div>
 
@@ -22,10 +22,10 @@
       <label>Password</label>
       <input type="password" class="form-control" formControlName="Password">
       <label class="text-danger"
-        *ngIf="service.formModel.get('Passwords.Password')!.touched && service.formModel.get('Passwords.Password')!.errors?.required">This
+        *ngIf="formModel.get('Passwords.Password')!.touched && formModel.get('Passwords.Password')!.errors?.required">This
         field is mandatory.</label>
       <label class="text-danger"
-        *ngIf="service.formModel.get('Passwords.Password')!.touched && service.formModel.get('Passwords.Password')!.errors?.minlength">Minimum
+        *ngIf="formModel.get('Passwords.Password')!.touched && formModel.get('Passwords.Password')!.errors?.minlength">Minimum
         4 characters required.</label>
     </div>
 
@@ -33,10 +33,10 @@
       <label>Confirm Password</label>
       <input type="password" class="form-control" formControlName="ConfirmPassword">
       <label class="text-danger"
-        *ngIf="service.formModel.get('Passwords.ConfirmPassword')!.touched && service.formModel.get('Passwords.ConfirmPassword')!.errors?.required">This
+        *ngIf="formModel.get('Passwords.ConfirmPassword')!.touched && formModel.get('Passwords.ConfirmPassword')!.errors?.required">This
         field is mandatory.</label>
       <label class="text-danger"
-        *ngIf="service.formModel.get('Passwords.ConfirmPassword')!.touched && service.formModel.get('Passwords.ConfirmPassword')!.errors?.passwordMismatch">Confirm
+        *ngIf="formModel.get('Passwords.ConfirmPassword')!.touched && formModel.get('Passwords.ConfirmPassword')!.errors?.passwordMismatch">Confirm
         Password does not match.</label>
     </div>
 
@@ -44,7 +44,7 @@
 
   <div class="form-row">
     <div class="form-group col-md-8 offset-md-2">
-      <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Register</button>
+      <button type="submit" class="btn btn-lg btn-block" [disabled]="!formModel.valid">Register</button>
     </div>
   </div>
 

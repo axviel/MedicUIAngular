@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -10,20 +10,22 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  formModel = {
-    UserName: '',
-    Password: ''
-  }
+  formModel: FormGroup;
 
-  constructor(private service: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private service: UserService, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('token') != null)
       this.router.navigateByUrl('/home');
+
+    this.formModel = this.fb.group({
+      UserName: ['', Validators.required],
+      Password: ['', Validators.required]
+    });
   }
 
-  onSubmit(form: NgForm) {
-    this.service.login(form.value).subscribe(
+  onSubmit() {
+    this.service.login(this.formModel.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
         this.router.navigateByUrl('/home');

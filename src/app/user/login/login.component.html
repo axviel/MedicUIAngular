@@ -1,17 +1,21 @@
-<!-- TODO Modify to Reactive Forms -->
-
-<form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
-  <div class="form-group">
+<form [formGroup]="formModel" class="mb-4" autocomplete="off" (submit)="onSubmit()">
+  <div class="form-group required">
     <label>Username</label>
-    <input class="form-control" #UserName="ngModel" name="UserName" [(ngModel)]="formModel.UserName" required>
+    <input class="form-control" formControlName="UserName">
+    <label class="text-danger"
+      *ngIf="formModel.get('UserName')!.touched && formModel.get('UserName')!.errors?.required">This
+      field is mandatory.</label>
   </div>
-  <div class="form-group">
+  <div class="form-group required">
     <label>Password</label>
-    <input type="password" class="form-control" #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required>
+    <input type="password" class="form-control" formControlName="Password">
+    <label class="text-danger"
+      *ngIf="formModel.get('Password')!.touched && formModel.get('Password')!.errors?.required">This
+      field is mandatory.</label>
   </div>
   <div class="form-row">
     <div class="form-group col-md-8 offset-md-2">
-      <button type="submit" class="btn btn-lg btn-block" [disabled]="form.invalid">Login</button>
+      <button type="submit" class="btn btn-lg btn-block" [disabled]="!formModel.valid">Login</button>
     </div>
   </div>
 </form>
