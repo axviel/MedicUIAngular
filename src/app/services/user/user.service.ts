@@ -28,4 +28,12 @@ export class UserService {
   getUserProfile() {
     return this.http.get(this.BaseURI + '/UserProfile');
   }
+
+  changePassword(formData: any){
+    return this.http.post(this.BaseURI + '/UserProfile/changepassword', formData);
+  }
+
+  updateAccount(formData: any){
+    return this.http.post(this.BaseURI + '/UserProfile/updateAccount', formData);
+  }
 }

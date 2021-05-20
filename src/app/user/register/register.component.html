@@ -5,12 +5,15 @@
     <input class="form-control" formControlName="UserName">
     <label class="text-danger"
       *ngIf="formModel.get('UserName')!.touched && formModel.get('UserName')!.errors?.required">This
-      field is mandatory.</label>
+      field is required.</label>
   </div>
 
-  <div class="form-group">
+  <div class="form-group required">
     <label>Email</label>
     <input class="form-control" formControlName="Email">
+    <label class="text-danger"
+      *ngIf="formModel.get('Email')!.touched && formModel.get('Email')!.errors?.required">This
+      field is required.</label>
     <label class="text-danger"
       *ngIf="formModel.get('Email')!.touched && formModel.get('Email')!.errors?.email">Invalid email
       address.</label>
@@ -23,7 +26,7 @@
       <input type="password" class="form-control" formControlName="Password">
       <label class="text-danger"
         *ngIf="formModel.get('Passwords.Password')!.touched && formModel.get('Passwords.Password')!.errors?.required">This
-        field is mandatory.</label>
+        field is required.</label>
       <label class="text-danger"
         *ngIf="formModel.get('Passwords.Password')!.touched && formModel.get('Passwords.Password')!.errors?.minlength">Minimum
         4 characters required.</label>
@@ -34,7 +37,7 @@
       <input type="password" class="form-control" formControlName="ConfirmPassword">
       <label class="text-danger"
         *ngIf="formModel.get('Passwords.ConfirmPassword')!.touched && formModel.get('Passwords.ConfirmPassword')!.errors?.required">This
-        field is mandatory.</label>
+        field is required.</label>
       <label class="text-danger"
         *ngIf="formModel.get('Passwords.ConfirmPassword')!.touched && formModel.get('Passwords.ConfirmPassword')!.errors?.passwordMismatch">Confirm
         Password does not match.</label>
@@ -43,7 +46,7 @@
   </div>
 
   <div class="form-row">
-    <div class="form-group col-md-8 offset-md-2">
+    <div class="form-group col-12">
       <button type="submit" class="btn btn-lg btn-block" [disabled]="!formModel.valid">Register</button>
     </div>
   </div>
