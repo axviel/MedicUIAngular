@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotifierService } from 'angular-notifier';
 import { UserService } from '../services/user/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class UpdateAccountComponent implements OnInit {
 
   formModel: FormGroup;
 
-  constructor(private fb: FormBuilder, public service: UserService) { }
+  constructor(private fb: FormBuilder, public service: UserService, private notifier: NotifierService) { }
 
   ngOnInit(): void {
     this.formModel = this.fb.group({
@@ -34,13 +35,13 @@ export class UpdateAccountComponent implements OnInit {
 
         if (res.succeeded) {
           this.formModel.reset();
-          console.log('Success: Account update successful.');
+          this.notifier.notify('success', 'Account update successful');
         } 
         else {
           res.errors.forEach((element: any) => {
             switch (element.code) {
               default:
-                console.log('Error: Update failed.');
+                this.notifier.notify('error', 'Update failed.');
                 break;
             }
           });
@@ -48,6 +49,7 @@ export class UpdateAccountComponent implements OnInit {
 
       },
       err => {
+        this.notifier.notify('error', err.message);
         console.log(err);
       }
     );

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   formModel: FormGroup;
 
-  constructor(private fb: FormBuilder, public service: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, public service: UserService, private router: Router, private notifier: NotifierService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('token') != null)
@@ -34,17 +35,17 @@ export class RegisterComponent implements OnInit {
 
         if (res.succeeded) {
           this.formModel.reset();
-          console.log('Success: New user created! Registration successful.');
+          this.notifier.notify('success', 'Success: New user created! Registration successful.');
         } 
         else {
           res.errors.forEach((element: any) => {
             switch (element.code) {
               case 'DuplicateUserName':
-                console.log('Error: Username is already taken. Registration failed.');
+                this.notifier.notify('error', 'Username is already taken. Registration failed.');
                 break;
 
               default:
-                console.log('Error: Registration failed.');
+                this.notifier.notify('error', 'Error: Registration failed.');
                 break;
             }
           });
@@ -52,6 +53,7 @@ export class RegisterComponent implements OnInit {
 
       },
       err => {
+        this.notifier.notify('error', err.message);
         console.log(err);
       }
     );

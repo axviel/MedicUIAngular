@@ -14,6 +14,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UpdateAccountComponent } from './update-account/update-account.component';
+import { AboutComponent } from './about/about.component';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,16 @@ import { UpdateAccountComponent } from './update-account/update-account.componen
     HomeComponent,
     NavbarComponent,
     ChangePasswordComponent,
-    UpdateAccountComponent
+    UpdateAccountComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NotifierModule
   ],
   providers: [
     UserService,

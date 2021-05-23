@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotifierService } from 'angular-notifier';
 import { UserService } from '../services/user/user.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ChangePasswordComponent implements OnInit {
 
   formModel: FormGroup;
 
-  constructor(private fb: FormBuilder, public service: UserService) { }
+  constructor(private fb: FormBuilder, public service: UserService, private notifier: NotifierService) { }
 
   ngOnInit(): void {
     this.formModel = this.fb.group({
@@ -27,17 +28,17 @@ export class ChangePasswordComponent implements OnInit {
 
         if (res.succeeded) {
           this.formModel.reset();
-          console.log('Success: Password update successful.');
+          this.notifier.notify('success', 'Password update successful.');
         } 
         else {
           res.errors.forEach((element: any) => {
             switch (element.code) {
               case 'PasswordMismatch':
-                console.log('Error: Current password is incorrect.');
+                this.notifier.notify('error', 'Current password is incorrect.');
                 break;
 
               default:
-                console.log('Error: Update failed.');
+                this.notifier.notify('error', 'Update failed.');
                 break;
             }
           });
@@ -45,6 +46,7 @@ export class ChangePasswordComponent implements OnInit {
 
       },
       err => {
+        this.notifier.notify('error', err.message);
         console.log(err);
       }
     );

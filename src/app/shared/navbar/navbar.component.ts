@@ -26,4 +26,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/user/login']);
   }
 
+  onHome(){
+    this.router.navigate(['/home']);
+  }
+
+  onAbout(){
+    this.router.navigate(['/about']);
+  }
+
 }
