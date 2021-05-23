@@ -17,6 +17,15 @@ export class UpdateAccountComponent implements OnInit {
     this.formModel = this.fb.group({
       Email: ['', [Validators.required, Validators.email]]
     });
+
+    this.service.getUpdateAccount().subscribe(
+      res => {
+        this.formModel.get('Email').setValue(res['email']);
+      },
+      err => {
+        console.log(err);
+      },
+    );
   }
 
   onSubmit() {

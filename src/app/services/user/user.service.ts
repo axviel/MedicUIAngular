@@ -36,4 +36,8 @@ export class UserService {
   updateAccount(formData: any){
     return this.http.post(this.BaseURI + '/UserProfile/updateAccount', formData);
   }
+
+  getUpdateAccount() {
+    return this.http.get(this.BaseURI + '/UserProfile/updateAccount');
+  }
 }
